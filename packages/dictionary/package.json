@@ -1,6 +1,6 @@
 {
   "name": "coc-dictionary",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "dictionary source for coc.nvim",
   "scripts": {},
   "engines": {

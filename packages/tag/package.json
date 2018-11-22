@@ -1,6 +1,6 @@
 {
   "name": "coc-tag",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "tag source for coc.nvim",
   "scripts": {},
   "engines": {
