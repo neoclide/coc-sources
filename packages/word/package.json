@@ -1,0 +1,58 @@
+{
+  "name": "coc-word",
+  "version": "1.0.0",
+  "description": "word source for coc.nvim",
+  "scripts": {},
+  "engines": {
+    "coc": ">=0.0.30"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neoclide/coc-sources.git"
+  },
+  "keywords": [
+    "coc.nvim",
+    "word"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "coc.source.word.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "coc.source.word.shortcut": {
+          "type": "string",
+          "default": "10K"
+        },
+        "coc.source.word.priority": {
+          "type": "integer",
+          "default": 1
+        },
+        "coc.source.word.filetypes": {
+          "type": "array",
+          "default": null,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "author": "chemzqm@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neoclide/coc-sources/issues"
+  },
+  "homepage": "https://github.com/neoclide/coc-sources#readme",
+  "devDependencies": {
+    "coc.nvim": "^0.0.32"
+  },
+  "dependencies": {
+    "pify": "^4.0.1"
+  }
+}

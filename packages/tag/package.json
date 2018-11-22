@@ -1,0 +1,58 @@
+{
+  "name": "coc-tag",
+  "version": "1.0.0",
+  "description": "tag source for coc.nvim",
+  "scripts": {},
+  "engines": {
+    "coc": ">=0.0.30"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neoclide/coc-sources.git"
+  },
+  "keywords": [
+    "coc.nvim",
+    "tag"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "coc.source.tag.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "coc.source.tag.shortcut": {
+          "type": "string",
+          "default": "T"
+        },
+        "coc.source.tag.priority": {
+          "type": "integer",
+          "default": 3
+        },
+        "coc.source.tag.filetypes": {
+          "type": "array",
+          "default": null,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "author": "chemzqm@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neoclide/coc-sources/issues"
+  },
+  "homepage": "https://github.com/neoclide/coc-sources#readme",
+  "devDependencies": {
+    "coc.nvim": "^0.0.32"
+  },
+  "dependencies": {
+    "pify": "^4.0.1"
+  }
+}

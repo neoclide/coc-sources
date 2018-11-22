@@ -1,0 +1,58 @@
+{
+  "name": "coc-dictionary",
+  "version": "1.0.0",
+  "description": "dictionary source for coc.nvim",
+  "scripts": {},
+  "engines": {
+    "coc": ">=0.0.30"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neoclide/coc-sources.git"
+  },
+  "keywords": [
+    "coc.nvim",
+    "dictionary"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "coc.source.dictionary.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "coc.source.dictionary.shortcut": {
+          "type": "string",
+          "default": "D"
+        },
+        "coc.source.dictionary.priority": {
+          "type": "integer",
+          "default": 1
+        },
+        "coc.source.dictionary.filetypes": {
+          "type": "array",
+          "default": null,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "author": "chemzqm@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neoclide/coc-sources/issues"
+  },
+  "homepage": "https://github.com/neoclide/coc-sources#readme",
+  "devDependencies": {
+    "coc.nvim": "^0.0.32"
+  },
+  "dependencies": {
+    "pify": "^4.0.1"
+  }
+}

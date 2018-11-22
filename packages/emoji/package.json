@@ -1,0 +1,60 @@
+{
+  "name": "coc-emoji",
+  "version": "1.0.0",
+  "description": "emoji source for coc.nvim",
+  "scripts": {},
+  "engines": {
+    "coc": ">=0.0.30"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neoclide/coc-sources.git"
+  },
+  "keywords": [
+    "coc.nvim",
+    "emoji"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "coc.source.emoji.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "coc.source.emoji.shortcut": {
+          "type": "string",
+          "default": "T"
+        },
+        "coc.source.emoji.priority": {
+          "type": "integer",
+          "default": 3
+        },
+        "coc.source.emoji.filetypes": {
+          "type": "array",
+          "default": [
+            "markdown"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "author": "chemzqm@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neoclide/coc-sources/issues"
+  },
+  "homepage": "https://github.com/neoclide/coc-sources#readme",
+  "devDependencies": {
+    "coc.nvim": "^0.0.32"
+  },
+  "dependencies": {
+    "pify": "^4.0.1"
+  }
+}
