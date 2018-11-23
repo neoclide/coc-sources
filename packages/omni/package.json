@@ -1,6 +1,6 @@
 {
   "name": "coc-omni",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "omni source for coc.nvim",
   "scripts": {},
   "engines": {
@@ -52,6 +52,5 @@
   "homepage": "https://github.com/neoclide/coc-omni#readme",
   "devDependencies": {
     "coc.nvim": "^0.0.32"
-  },
-  "dependencies": {}
+  }
 }
