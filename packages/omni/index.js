@@ -28,6 +28,7 @@ exports.activate = context => {
     name: 'omni',
     enable: config.get('enable', true),
     priority: config.get('priority', 99),
+    filetypes: config.get('filetypes', []),
     sourceType: SourceType.Remote,
     triggerCharacters: [],
     doComplete: async opt => {

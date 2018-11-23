@@ -19,6 +19,7 @@ exports.activate = context => {
     enable: config.get('enable', true),
     priority: config.get('priority', 99),
     sourceType: SourceType.Service,
+    filetypes: ['go'],
     triggerCharacters: ['.', ':'],
     doComplete: opt => {
       let { filepath, linenr, col, input, bufnr } = opt
