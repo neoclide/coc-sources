@@ -1,0 +1,56 @@
+{
+  "name": "coc-neosnippet",
+  "version": "0.0.1",
+  "description": "neosnippet source for coc.nvim",
+  "scripts": {},
+  "engines": {
+    "coc": ">=0.0.30"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neoclide/coc-sources.git"
+  },
+  "keywords": [
+    "coc.nvim",
+    "neosnippet"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "coc.source.neosnippet.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "coc.source.neosnippet.priority": {
+          "type": "integer",
+          "default": 100
+        },
+        "coc.source.neosnippet.shortcut": {
+          "type": "string",
+          "default": "NS"
+        },
+        "coc.source.neosnippet.filetypes": {
+          "type": "array",
+          "default": null,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "author": "chemzqm@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neoclide/coc-sources/issues"
+  },
+  "homepage": "https://github.com/neoclide/coc-sources#readme",
+  "devDependencies": {
+    "coc.nvim": "^0.0.32"
+  },
+  "dependencies": {}
+}
