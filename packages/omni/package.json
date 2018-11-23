@@ -1,0 +1,57 @@
+{
+  "name": "coc-omni",
+  "version": "1.0.0",
+  "description": "omni source for coc.nvim",
+  "scripts": {},
+  "engines": {
+    "coc": ">=0.0.30"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neoclide/coc-omni.git"
+  },
+  "keywords": [
+    "coc.nvim",
+    "omni"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "coc.source.omni.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "coc.source.omni.priority": {
+          "type": "integer",
+          "default": 9
+        },
+        "coc.source.omni.shortcut": {
+          "type": "string",
+          "default": "O"
+        },
+        "coc.source.omni.filetypes": {
+          "type": "array",
+          "default": [],
+          "description": "Enabled filetypes",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "author": "chemzqm@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neoclide/coc-omni/issues"
+  },
+  "homepage": "https://github.com/neoclide/coc-omni#readme",
+  "devDependencies": {
+    "coc.nvim": "^0.0.32"
+  },
+  "dependencies": {}
+}

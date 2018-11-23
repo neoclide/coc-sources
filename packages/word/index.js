@@ -11,7 +11,7 @@ exports.activate = async context => {
   const words = content.split(/\n/)
 
   let source = {
-    name: 'omni',
+    name: 'word',
     enable: config.get('enable', true),
     priority: config.get('priority', 0),
     sourceType: SourceType.Native,

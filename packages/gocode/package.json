@@ -1,0 +1,56 @@
+{
+  "name": "coc-gocode",
+  "version": "1.0.3",
+  "description": "gocode source for coc.nvim",
+  "scripts": {},
+  "engines": {
+    "coc": ">=0.0.30"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neoclide/coc-gocode.git"
+  },
+  "keywords": [
+    "coc.nvim",
+    "gocode"
+  ],
+  "activationEvents": [
+    "onLanguage:go"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "coc.source.gocode.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "coc.source.gocode.priority": {
+          "type": "integer",
+          "default": 99
+        },
+        "coc.source.gocode.shortcut": {
+          "type": "string",
+          "default": "GOC"
+        },
+        "coc.source.gocode.gocodeBinary": {
+          "type": "string",
+          "default": "",
+          "description": "Binary full path of gocode executable"
+        }
+      }
+    }
+  },
+  "author": "chemzqm@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neoclide/coc-gocode/issues"
+  },
+  "homepage": "https://github.com/neoclide/coc-gocode#readme",
+  "devDependencies": {
+    "coc.nvim": "^0.0.32"
+  },
+  "dependencies": {
+    "which": "^1.3.1"
+  }
+}
