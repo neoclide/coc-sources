@@ -1,6 +1,6 @@
 {
   "name": "coc-gocode",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "gocode source for coc.nvim",
   "scripts": {},
   "engines": {
