@@ -27,6 +27,8 @@ exports.activate = context => {
       nvim.call('neosnippet#mappings#expand_impl', [], true)
     },
     onEnter: async () => {
+      let loaded = await nvim.getVar('loaded_neosnippet')
+      if (loaded == 0) return
       let buftype = await nvim.eval('&buftype')
       if (buftype != '') return
       let filetype = await nvim.eval('&filetype')
