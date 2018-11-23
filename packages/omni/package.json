@@ -1,6 +1,6 @@
 {
   "name": "coc-omni",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "omni source for coc.nvim",
   "scripts": {},
   "engines": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neoclide/coc-omni.git"
+    "url": "git+https://github.com/neoclide/coc-sources.git"
   },
   "keywords": [
     "coc.nvim",
@@ -47,9 +47,9 @@
   "author": "chemzqm@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/neoclide/coc-omni/issues"
+    "url": "https://github.com/neoclide/coc-sources/issues"
   },
-  "homepage": "https://github.com/neoclide/coc-omni#readme",
+  "homepage": "https://github.com/neoclide/coc-sources#readme",
   "devDependencies": {
     "coc.nvim": "^0.0.32"
   }
