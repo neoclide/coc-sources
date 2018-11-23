@@ -1,6 +1,8 @@
 # coc-sources
 
-Some extra sources of [coc.nvim](https://github.com/neoclide/coc.nvim)
+Some extra completion sources of [coc.nvim](https://github.com/neoclide/coc.nvim).
+
+Install what you need by command `:CocInstall {name}`
 
 - coc-dictionary
 
@@ -56,6 +58,22 @@ Some extra sources of [coc.nvim](https://github.com/neoclide/coc.nvim)
 
   ```vim
   :CocInstall coc-gocode
+  ```
+
+- coc-ultisnips
+
+  Completion for items from [ultisnips](https://github.com/SirVer/ultisnips)
+
+  ```vim
+  :CocInstall coc-ultisnips
+  ```
+
+- coc-neosnippet
+
+  Completion for items from [neosnippet](https://github.com/Shougo/neosnippet.vim)
+
+  ```vim
+  :CocInstall coc-neosnippet
   ```
 
 ## Configure
