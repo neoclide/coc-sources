@@ -1,0 +1,56 @@
+{
+  "name": "coc-ultisnips",
+  "version": "0.0.2",
+  "description": "ultisnips source for coc.nvim",
+  "scripts": {},
+  "engines": {
+    "coc": ">=0.0.30"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neoclide/coc-sources.git"
+  },
+  "keywords": [
+    "coc.nvim",
+    "ultisnips"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "coc.source.ultisnips.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "coc.source.ultisnips.priority": {
+          "type": "integer",
+          "default": 100
+        },
+        "coc.source.ultisnips.shortcut": {
+          "type": "string",
+          "default": "US"
+        },
+        "coc.source.ultisnips.filetypes": {
+          "type": "array",
+          "default": null,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "author": "chemzqm@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neoclide/coc-sources/issues"
+  },
+  "homepage": "https://github.com/neoclide/coc-sources#readme",
+  "devDependencies": {
+    "coc.nvim": "^0.0.32"
+  },
+  "dependencies": {}
+}
