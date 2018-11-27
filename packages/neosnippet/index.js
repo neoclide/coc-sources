@@ -48,12 +48,6 @@ exports.activate = context => {
     }
   }
 
-  workspace.onDidOpenTextDocument(async textDocument => {
-    let doc = workspace.getDocument(textDocument.uri)
-    if (!doc || doc.buftype != '') return
-
-  })
-
   sources.addSource(source)
 
   context.subscriptions.push({
