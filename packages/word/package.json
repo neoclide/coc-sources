@@ -31,7 +31,7 @@
         },
         "coc.source.word.priority": {
           "type": "integer",
-          "default": 1
+          "default": 0
         },
         "coc.source.word.filetypes": {
           "type": "array",
