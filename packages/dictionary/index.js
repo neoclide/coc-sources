@@ -1,57 +1,99 @@
 const fs = require('fs')
+const readline = require('readline')
 const pify = require('pify')
 const { sources, workspace, SourceType } = require('coc.nvim')
 
-const dicts = {}
+const DICT_CACHE = {}
+
+function readFileByLine(file, limit = 300000) {
+  const set = new Set()
+  const rl = readline.createInterface({
+    input: fs.createReadStream(file),
+    crlfDelay: Infinity,
+    terminal: false,
+    highWaterMark: 1024 * 1024
+  })
+  let n = 0
+  rl.on('line', line => {
+    n = n + 1
+    if (n === limit) {
+      rl.close()
+    } else if (line.length > 0) {
+      let words = line.split(/\s+/)
+      for (let word of words) {
+        if (word.length > 1) set.add(word)
+      }
+    }
+  })
+  return new Promise((resolve, reject) => {
+    rl.on('close', () => {
+      resolve(set)
+    })
+    rl.on('error', reject)
+  })
+}
 
 async function getDictWords(file) {
-  if (!file) return []
-  let words = dicts[file] || null
-  if (words && words.length) return words
-  let stat = await pify(fs.stat)(file)
-  if (!stat || !stat.isFile()) return []
   try {
-    let content = await pify(fs.readFile)(file, 'utf8')
-    words = content.split('\n')
+    let stat = await pify(fs.stat)(file)
+    if (!stat || !stat.isFile()) return null
+    let cache = DICT_CACHE[file]
+    if (cache && cache.mtime == stat.mtime) {
+      return cache.words
+    }
+    let words = await readFileByLine(file)
+    DICT_CACHE[file] = { mtime: stat.mtime, words }
+    return words
   } catch (e) {
-    // tslint:disable-next-line:no-console
-    console.error(`Can't read file: ${file}`)
+    console.error(e)
   }
-  dicts[file] = words
-  return words
+  return []
 }
 
 async function getWords(files) {
   if (files.length == 0) return []
   let arr = await Promise.all(files.map(file => getDictWords(file)))
-  let res = []
+  let res = new Set()
   for (let words of arr) {
+    if (words == null) continue
     for (let word of words) {
-      if (res.indexOf(word) === -1) {
-        res.push(word)
-      }
+      if (!res.has(word)) res.add(word)
     }
   }
-  return res
+  return Array.from(res)
 }
 
 function filterWords(words, opt) {
   let res = []
   let { input } = opt
-  let cword = opt.word
-  if (!input.length) return []
   for (let word of words) {
     if (!word.startsWith(input[0])) continue
-    if (word == cword || word == input) continue
+    if (word.length <= input.length) continue
     res.push(word)
   }
   return res
 }
 
-exports.activate = context => {
+function loadFiles(dictionary) {
+  if (!dictionary) return
+  for (let file of dictionary.split(',')) {
+    getDictWords(file)
+  }
+}
+
+exports.activate = async context => {
   let config = workspace.getConfiguration('coc.source.dictionary')
   let menu = '[' + config.get('shortcut', 'D') + ']'
   let { nvim } = workspace
+  let dictOption = await nvim.eval('&dictionary')
+  if (dictOption) loadFiles(dictOption)
+
+  workspace.onDidOpenTextDocument(async textDocment => {
+    let doc = workspace.getDocument(textDocment.uri)
+    if (!doc) return
+    let dict = await doc.buffer.getOption('dictionary')
+    loadFiles(dict)
+  })
 
   let source = {
     name: 'dictionary',
@@ -62,13 +104,10 @@ exports.activate = context => {
     triggerCharacters: [],
     doComplete: async opt => {
       let dictOption = await nvim.eval('&dictionary')
-      if (!dictOption || !opt.input) return null
-      let words = []
-      if (dictOption) {
-        let files = dictOption.split(',')
-        words = await getWords(files)
-        words = filterWords(words, opt)
-      }
+      if (!dictOption || opt.input.length == 0) return null
+      let files = dictOption.split(',')
+      let words = await getWords(files)
+      words = filterWords(words, opt)
       return {
         items: words.map(word => {
           return {
