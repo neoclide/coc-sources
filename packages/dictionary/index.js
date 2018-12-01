@@ -91,7 +91,7 @@ exports.activate = async context => {
   workspace.onDidOpenTextDocument(async textDocment => {
     let doc = workspace.getDocument(textDocment.uri)
     if (!doc) return
-    let dict = await doc.buffer.getOption('dictionary')
+    let dict = await nvim.eval('&dictionary')
     loadFiles(dict)
   })
 
