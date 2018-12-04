@@ -68,6 +68,8 @@ Install what you need by command `:CocInstall {name}`
   :CocInstall coc-ultisnips
   ```
 
+  **Note:** this source may not work when you're using lazyLoad.
+
 - coc-neosnippet
 
   Completion for items from [neosnippet](https://github.com/Shougo/neosnippet.vim)
@@ -75,6 +77,8 @@ Install what you need by command `:CocInstall {name}`
   ```vim
   :CocInstall coc-neosnippet
   ```
+
+  **Note:** this source may not work when you're using lazyLoad.
 
 ## Configure
 
