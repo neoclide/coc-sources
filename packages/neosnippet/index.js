@@ -34,17 +34,21 @@ exports.activate = context => {
       let filetype = await nvim.eval('&filetype')
       if (!filetype) return
       let items = []
-      let obj = await nvim.call('neosnippet#helpers#get_completion_snippets')
-      for (let key of Object.keys(obj)) {
-        let val = obj[key]
-        items.push({
-          word: val.word,
-          info: val.menu_abbr,
-          menu: `[${shortcut}]`,
-          isSnippet: true
-        })
+      try {
+        let obj = await nvim.call('neosnippet#helpers#get_completion_snippets')
+        for (let key of Object.keys(obj)) {
+          let val = obj[key]
+          items.push({
+            word: val.word,
+            info: val.menu_abbr,
+            menu: `[${shortcut}]`,
+            isSnippet: true
+          })
+        }
+        cache[filetype] = items
+      } catch (e) {
+        return
       }
-      cache[filetype] = items
     }
   }
 
