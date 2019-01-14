@@ -24,7 +24,9 @@ exports.activate = context => {
       return { items }
     },
     onCompleteDone: () => {
-      nvim.call('neosnippet#mappings#expand_impl', [], true)
+      setTimeout(() => {
+        nvim.call('neosnippet#mappings#expand_impl', [], true)
+      }, 50)
     },
     onEnter: async () => {
       let loaded = await nvim.getVar('loaded_neosnippet')

@@ -1,6 +1,6 @@
 {
   "name": "coc-neosnippet",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "neosnippet source for coc.nvim",
   "scripts": {},
   "engines": {
