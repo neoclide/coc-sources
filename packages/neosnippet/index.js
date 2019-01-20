@@ -6,6 +6,24 @@ exports.activate = context => {
   let shortcut = config.get('shortcut', 'NS')
   let cache = {}
 
+  async function getItems(filetype) {
+    let items = cache[filetype]
+    if (items && items.length) return items
+    items = []
+    let obj = await nvim.call('neosnippet#helpers#get_completion_snippets')
+    for (let key of Object.keys(obj)) {
+      let val = obj[key]
+      items.push({
+        word: val.word,
+        info: val.menu_abbr,
+        menu: `[${shortcut}]`,
+        isSnippet: true
+      })
+    }
+    cache[filetype] = items
+    return items
+  }
+
   let source = {
     name: 'neosnippet',
     enable: config.get('enable', true),
@@ -19,8 +37,7 @@ exports.activate = context => {
         workspace.showMessage('Neosnippet not loaded', 'error')
         return
       }
-      let items = cache[opt.filetype]
-      if (!items) return null
+      let items = await getItems(opt.filetype)
       return { items }
     },
     onCompleteDone: () => {
@@ -33,19 +50,8 @@ exports.activate = context => {
       if (buftype != '') return
       let filetype = await nvim.eval('&filetype')
       if (!filetype) return
-      let items = []
       try {
-        let obj = await nvim.call('neosnippet#helpers#get_completion_snippets')
-        for (let key of Object.keys(obj)) {
-          let val = obj[key]
-          items.push({
-            word: val.word,
-            info: val.menu_abbr,
-            menu: `[${shortcut}]`,
-            isSnippet: true
-          })
-        }
-        cache[filetype] = items
+        await getItems(filetype)
       } catch (e) {
         return
       }

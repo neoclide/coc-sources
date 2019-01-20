@@ -22,7 +22,7 @@ exports.activate = async context => {
     enable: config.get('enable', true),
     priority: config.get('priority', 1),
     filetypes: config.get('filetypes', ['markdown']),
-    sourceType: SourceType.Remote,
+    sourceType: SourceType.Native,
     triggerCharacters: [':'],
     doComplete: async opt => {
       if (opt.triggerCharacter != ':') return
