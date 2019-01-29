@@ -1,7 +1,7 @@
 const { sources, workspace, SourceType } = require('coc.nvim')
 const path = require('path')
 const fs = require('fs')
-const pify = require('pify')
+const util = require('util')
 const readline = require('readline')
 
 const TAG_CACHE = {}
@@ -16,7 +16,7 @@ async function getTagFiles() {
   })
   let tagfiles = []
   for (let file of files) {
-    let stat = await pify(fs.stat)(file)
+    let stat = await util.promisify(fs.stat)(file)
     if (!stat || !stat.isFile()) continue
     tagfiles.push({ file, mtime: stat.mtime })
   }

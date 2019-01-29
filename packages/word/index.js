@@ -1,13 +1,13 @@
 const { sources, workspace, SourceType } = require('coc.nvim')
 const path = require('path')
 const fs = require('fs')
-const pify = require('pify')
+const util = require('util')
 
 exports.activate = async context => {
   let config = workspace.getConfiguration('coc.source.word')
   let menu = '[' + config.get('shortcut', '10K') + ']'
   let file = path.resolve(__dirname, '10k.txt')
-  let content = await pify(fs.readFile)(file, 'utf8')
+  let content = await util.promisify(fs.readFile)(file, 'utf8')
   const words = content.split(/\n/)
 
   let source = {

@@ -1,7 +1,7 @@
 const { sources, workspace, SourceType } = require('coc.nvim')
 const path = require('path')
 const fs = require('fs')
-const pify = require('pify')
+const util = require('util')
 
 exports.activate = async context => {
   let config = workspace.getConfiguration('coc.source.emoji')
@@ -9,7 +9,7 @@ exports.activate = async context => {
   let file = path.resolve(__dirname, 'emoji.txt')
   if (!fs.existsSync(file)) return
 
-  let content = await pify(fs.readFile)(file, 'utf8')
+  let content = await util.promisify(fs.readFile)(file, 'utf8')
   let lines = content.split(/\n/).slice(0, -1)
   let items = lines.map(str => {
     let parts = str.split(':')

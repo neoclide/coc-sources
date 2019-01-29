@@ -54,7 +54,5 @@
   "devDependencies": {
     "coc.nvim": "^0.0.32"
   },
-  "dependencies": {
-    "pify": "^4.0.1"
-  }
+  "dependencies": {}
 }

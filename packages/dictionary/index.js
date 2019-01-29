@@ -1,6 +1,6 @@
 const fs = require('fs')
 const readline = require('readline')
-const pify = require('pify')
+const util = require('util')
 const { sources, workspace, SourceType } = require('coc.nvim')
 
 const DICT_CACHE = {}
@@ -35,7 +35,7 @@ function readFileByLine(file, limit = 300000) {
 
 async function getDictWords(file) {
   try {
-    let stat = await pify(fs.stat)(file)
+    let stat = await util.promisify(fs.stat)(file)
     if (!stat || !stat.isFile()) return null
     let cache = DICT_CACHE[file]
     if (cache && cache.mtime == stat.mtime) {
