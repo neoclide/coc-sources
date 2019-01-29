@@ -1,6 +1,6 @@
 {
   "name": "coc-emoji",
-  "version": "0.0.2",
+  "version": "1.1.0",
   "description": "emoji source for coc.nvim",
   "scripts": {},
   "engines": {
@@ -53,6 +53,5 @@
   "homepage": "https://github.com/neoclide/coc-sources#readme",
   "devDependencies": {
     "coc.nvim": "^0.0.32"
-  },
-  "dependencies": {}
+  }
 }
