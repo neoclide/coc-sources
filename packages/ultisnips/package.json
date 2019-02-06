@@ -25,6 +25,13 @@
           "type": "boolean",
           "default": true
         },
+        "coc.source.ultisnips.disableSyntaxes": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
         "coc.source.ultisnips.priority": {
           "type": "integer",
           "default": 100

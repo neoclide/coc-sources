@@ -21,6 +21,13 @@
     "configuration": {
       "type": "object",
       "properties": {
+        "coc.source.gocode.disableSyntaxes": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
         "coc.source.gocode.enable": {
           "type": "boolean",
           "default": true

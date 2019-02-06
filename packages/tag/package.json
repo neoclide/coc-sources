@@ -33,6 +33,13 @@
           "type": "integer",
           "default": 3
         },
+        "coc.source.tag.disableSyntaxes": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
         "coc.source.tag.filetypes": {
           "type": "array",
           "default": null,

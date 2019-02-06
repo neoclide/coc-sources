@@ -29,6 +29,13 @@
           "type": "integer",
           "default": 9
         },
+        "coc.source.omni.disableSyntaxes": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
         "coc.source.omni.shortcut": {
           "type": "string",
           "default": "O"

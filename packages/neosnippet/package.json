@@ -25,6 +25,13 @@
           "type": "boolean",
           "default": true
         },
+        "coc.source.neosnippet.disableSyntaxes": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
         "coc.source.neosnippet.priority": {
           "type": "integer",
           "default": 100

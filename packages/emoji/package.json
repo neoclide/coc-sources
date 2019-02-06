@@ -33,6 +33,13 @@
           "type": "integer",
           "default": 3
         },
+        "coc.source.emoji.disableSyntaxes": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
         "coc.source.emoji.filetypes": {
           "type": "array",
           "default": [
