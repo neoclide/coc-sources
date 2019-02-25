@@ -1,21 +1,17 @@
-const { sources, workspace, SourceType } = require('coc.nvim')
+const { sources, workspace } = require('coc.nvim')
 
 exports.activate = context => {
-  let config = workspace.getConfiguration('coc.source.ultisnips')
   let { nvim } = workspace
-  let shortcut = config.get('shortcut', 'US')
 
+  let loadError = false
   let source = {
     name: 'ultisnips',
-    enable: config.get('enable', true),
-    priority: config.get('priority', 100),
-    filetypes: config.get('filetypes', null),
-    sourceType: SourceType.Remote,
     triggerCharacters: [],
-    doComplete: async () => {
+    doComplete: async function () {
       let loaded = await nvim.getVar('did_plugin_ultisnips')
-      if (loaded == 0) {
-        workspace.showMessage('Ultisnips not loaded', 'error')
+      if (!loaded) {
+        if (!loadError) workspace.showMessage('Ultisnips not loaded', 'error')
+        loadError = true
         return
       }
       let res = await nvim.call('UltiSnips#SnippetsInCurrentScope')
@@ -25,7 +21,7 @@ exports.activate = context => {
           items.push({
             word: item.key,
             info: item.description || '',
-            menu: `[${shortcut}]`,
+            menu: this.menu,
             isSnippet: true
           })
         }
@@ -34,7 +30,7 @@ exports.activate = context => {
           items.push({
             word: key,
             info: res[key] || '',
-            menu: `[${shortcut}]`,
+            menu: this.menu,
             isSnippet: true
           })
         }
@@ -46,11 +42,5 @@ exports.activate = context => {
     }
   }
 
-  sources.addSource(source)
-
-  context.subscriptions.push({
-    dispose: () => {
-      sources.removeSource(source)
-    }
-  })
+  context.subscriptions.push(sources.createSource(source))
 }

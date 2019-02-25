@@ -4,7 +4,7 @@
   "description": "omni source for coc.nvim",
   "scripts": {},
   "engines": {
-    "coc": ">=0.0.30"
+    "coc": ">=0.0.57"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,13 @@
         "coc.source.omni.priority": {
           "type": "integer",
           "default": 9
+        },
+        "coc.source.omni.triggerCharacters": {
+          "type": "array",
+          "default": null,
+          "items": {
+            "type": "string"
+          }
         },
         "coc.source.omni.disableSyntaxes": {
           "type": "array",
@@ -58,6 +65,6 @@
   },
   "homepage": "https://github.com/neoclide/coc-sources#readme",
   "devDependencies": {
-    "coc.nvim": "^0.0.32"
+    "coc.nvim": ">=0.0.57"
   }
 }

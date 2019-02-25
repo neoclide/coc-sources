@@ -1,4 +1,4 @@
-const { sources, workspace, SourceType } = require('coc.nvim')
+const { sources, workspace } = require('coc.nvim')
 const path = require('path')
 const fs = require('fs')
 const util = require('util')
@@ -62,17 +62,9 @@ async function loadTags(fullpath, mtime) {
 }
 
 exports.activate = context => {
-  let config = workspace.getConfiguration('coc.source.tag')
-  let menu = '[' + config.get('shortcut', 'T') + ']'
-
-  let source = {
+  context.subscriptions.push(sources.createSource({
     name: 'tag',
-    enable: config.get('enable', true),
-    priority: config.get('priority', 3),
-    sourceType: SourceType.Native,
-    filetypes: config.get('filetypes', null),
-    triggerCharacters: [],
-    doComplete: async opt => {
+    doComplete: async function (opt) {
       let { input } = opt
       if (input.length == 0) return null
       let tagfiles = await getTagFiles()
@@ -90,17 +82,10 @@ exports.activate = context => {
         items: words.map(word => {
           return {
             word,
-            menu
+            menu: this.menu
           }
         })
       }
     }
-  }
-
-  sources.addSource(source)
-  context.subscriptions.push({
-    dispose: () => {
-      sources.removeSource(source)
-    }
-  })
+  }))
 }

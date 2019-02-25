@@ -1,23 +1,20 @@
-const { sources, workspace, SourceType } = require('coc.nvim')
+const { sources } = require('coc.nvim')
 const path = require('path')
 const fs = require('fs')
-const util = require('util')
+
+let words = []
 
 exports.activate = async context => {
-  let config = workspace.getConfiguration('coc.source.word')
-  let menu = '[' + config.get('shortcut', '10K') + ']'
   let file = path.resolve(__dirname, '10k.txt')
-  let content = await util.promisify(fs.readFile)(file, 'utf8')
-  const words = content.split(/\n/)
+  fs.readFile(file, 'utf8', (err, content) => {
+    if (err) return
+    words = content.split(/\n/)
+  })
 
-  let source = {
+  context.subscriptions.push(sources.createSource({
     name: 'word',
-    enable: config.get('enable', true),
-    priority: config.get('priority', 0),
-    sourceType: SourceType.Native,
-    filetypes: config.get('filetypes', null),
     triggerCharacters: [],
-    doComplete: async opt => {
+    doComplete: async function (opt) {
       if (!opt.input) return null
       if (!/^[A-Za-z]{1,}$/.test(opt.input)) return null
       let first = opt.input[0]
@@ -29,17 +26,10 @@ exports.activate = async context => {
           let word = upperCase ? str[0].toUpperCase() + str.slice(1) : str
           return {
             word,
-            menu
+            menu: this.menu
           }
         })
       }
     }
-  }
-
-  sources.addSource(source)
-  context.subscriptions.push({
-    dispose: () => {
-      sources.removeSource(source)
-    }
-  })
+  }))
 }

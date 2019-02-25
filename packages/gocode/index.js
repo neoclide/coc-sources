@@ -1,4 +1,4 @@
-const { sources, workspace, SourceType } = require('coc.nvim')
+const { sources, workspace } = require('coc.nvim')
 const which = require('which')
 const { spawn } = require('child_process')
 
@@ -16,16 +16,12 @@ exports.activate = context => {
 
   let source = {
     name: 'gocode',
-    enable: config.get('enable', true),
-    priority: config.get('priority', 99),
-    sourceType: SourceType.Service,
-    filetypes: ['go'],
     triggerCharacters: ['.', ':'],
-    doComplete: opt => {
+    doComplete: function (opt, token) {
       let { filepath, linenr, col, input, bufnr } = opt
       let document = workspace.getDocument(bufnr)
 
-      let menu = config.get('shortcut', '')
+      let menu = this.menu || ''
       if (input.length) {
         // limit result
         col = col + 1
@@ -35,6 +31,10 @@ exports.activate = context => {
       return new Promise((resolve, reject) => {
         let output = ''
         let exited = false
+        token.onCancellationRequested(() => {
+          child.kill('SIGHUP')
+          resolve(null)
+        })
         child.stdout.on('data', data => {
           output = output + data.toString()
         })
@@ -71,11 +71,5 @@ exports.activate = context => {
     }
   }
 
-  sources.addSource(source)
-
-  context.subscriptions.push({
-    dispose: () => {
-      sources.removeSource(source)
-    }
-  })
+  context.subscriptions.push(sources.createSource(source))
 }

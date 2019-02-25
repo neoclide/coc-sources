@@ -1,7 +1,7 @@
 const fs = require('fs')
 const readline = require('readline')
 const util = require('util')
-const { sources, workspace, SourceType } = require('coc.nvim')
+const { sources, workspace } = require('coc.nvim')
 
 const DICT_CACHE = {}
 
@@ -74,35 +74,13 @@ function filterWords(words, opt) {
   return res
 }
 
-function loadFiles(dictionary) {
-  if (!dictionary) return
-  for (let file of dictionary.split(',')) {
-    getDictWords(file)
-  }
-}
-
 exports.activate = async context => {
-  let config = workspace.getConfiguration('coc.source.dictionary')
-  let menu = '[' + config.get('shortcut', 'D') + ']'
   let { nvim } = workspace
-  let dictOption = await nvim.eval('&dictionary')
-  if (dictOption) loadFiles(dictOption)
-
-  workspace.onDidOpenTextDocument(async textDocment => {
-    let doc = workspace.getDocument(textDocment.uri)
-    if (!doc) return
-    let dict = await nvim.eval('&dictionary')
-    loadFiles(dict)
-  })
 
   let source = {
     name: 'dictionary',
-    enable: config.get('enable', true),
-    priority: config.get('priority', 3),
-    filetypes: config.get('filetypes', null),
-    sourceType: SourceType.Native,
     triggerCharacters: [],
-    doComplete: async opt => {
+    doComplete: async function (opt) {
       let dictOption = await nvim.eval('&dictionary')
       if (!dictOption || opt.input.length == 0) return null
       let files = dictOption.split(',')
@@ -112,17 +90,12 @@ exports.activate = async context => {
         items: words.map(word => {
           return {
             word,
-            menu
+            menu: this.menu
           }
         })
       }
     }
   }
 
-  sources.addSource(source)
-  context.subscriptions.push({
-    dispose: () => {
-      sources.removeSource(source)
-    }
-  })
+  context.subscriptions.push(sources.createSource(source))
 }

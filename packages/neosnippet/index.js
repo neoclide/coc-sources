@@ -1,12 +1,10 @@
-const { sources, workspace, SourceType } = require('coc.nvim')
+const { sources, workspace } = require('coc.nvim')
 
 exports.activate = context => {
-  let config = workspace.getConfiguration('coc.source.neosnippet')
   let { nvim } = workspace
-  let shortcut = config.get('shortcut', 'NS')
   let cache = {}
 
-  async function getItems(filetype) {
+  async function getItems(filetype, menu) {
     let items = cache[filetype]
     if (items && items.length) return items
     items = []
@@ -15,8 +13,7 @@ exports.activate = context => {
       let val = obj[key]
       items.push({
         word: val.word,
-        info: val.menu_abbr,
-        menu: `[${shortcut}]`,
+        menu: val.menu_abbr + (menu? ` ${menu}` : ''),
         isSnippet: true
       })
     }
@@ -24,20 +21,18 @@ exports.activate = context => {
     return items
   }
 
+  let loadError = false
   let source = {
     name: 'neosnippet',
-    enable: config.get('enable', true),
-    priority: config.get('priority', 100),
-    filetypes: config.get('filetypes', null),
-    sourceType: SourceType.Remote,
     triggerCharacters: [],
-    doComplete: async opt => {
+    doComplete: async function (opt) {
       let loaded = await nvim.getVar('loaded_neosnippet')
-      if (loaded == 0) {
-        workspace.showMessage('Neosnippet not loaded', 'error')
+      if (!loaded) {
+        if (!loadError) workspace.showMessage('Neosnippet not loaded', 'error')
+        loadError = true
         return
       }
-      let items = await getItems(opt.filetype)
+      let items = await getItems(opt.filetype, this.menu)
       return { items }
     },
     onCompleteDone: () => {
@@ -58,11 +53,5 @@ exports.activate = context => {
     }
   }
 
-  sources.addSource(source)
-
-  context.subscriptions.push({
-    dispose: () => {
-      sources.removeSource(source)
-    }
-  })
+  context.subscriptions.push(sources.createSource(source))
 }

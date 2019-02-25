@@ -20,6 +20,10 @@ Install what you need by command `:CocInstall {name}`
   :CocInstall coc-tag
   ```
 
+  **Note:** you need generate the tag files yourself.
+
+  To get the tags of current buffer, use command `:echo tagfiles()`.
+
 - coc-word
 
   Words from google 10000 english repo.
@@ -46,11 +50,14 @@ Install what you need by command `:CocInstall {name}`
   :CocInstall coc-omni
   ```
 
-  Using omni completion in coc.nvim is not recommended, it will block vim on
+  **Note:** Using omni completion in coc.nvim is not recommended, it will block vim on
   completion.
 
-  Don't enable this source for filetypes that you're using language server for
-  completion.
+  **Note:** You must configure `omni.filetypes` with filetypes you want omni
+  source to work.
+
+  **Don't** enable this source for filetypes that you're using language server
+  for completion.
 
 - coc-gocode
 
@@ -68,7 +75,7 @@ Install what you need by command `:CocInstall {name}`
   :CocInstall coc-ultisnips
   ```
 
-  **Note:** this source may not work when you're using lazyLoad.
+  **Note:** this source could be block and may not work when you're using lazyLoad.
 
 - coc-neosnippet
 
@@ -78,7 +85,7 @@ Install what you need by command `:CocInstall {name}`
   :CocInstall coc-neosnippet
   ```
 
-  **Note:** this source may not work when you're using lazyLoad.
+  **Note:** this source could be block and may not work when you're using lazyLoad.
 
 ## Configure
 
@@ -88,8 +95,10 @@ Following properties could be configured:
 - `priority` priority of source.
 - `shortcut` shortcut used in `menu` of completion item.
 - `filetypes` enabled filetypes, enable for all filetypes when `null`.
+- `disableSyntaxes` syntax names used to disable completion, ex: `['string', 'comment']`.
 
-Use `coc.source` in your `coc-settings.json` for available configurations.
+Install `coc-json` by `:CocInstall coc-json` and Type `coc.source` settings file
+opened by `:CocConfig` to get completion for all available configurations.
 
 ## F.A.Q
 

@@ -4,7 +4,7 @@
   "description": "emoji source for coc.nvim",
   "scripts": {},
   "engines": {
-    "coc": ">=0.0.30"
+    "coc": ">=0.0.57"
   },
   "repository": {
     "type": "git",
@@ -59,6 +59,6 @@
   },
   "homepage": "https://github.com/neoclide/coc-sources#readme",
   "devDependencies": {
-    "coc.nvim": "^0.0.32"
+    "coc.nvim": ">=0.0.57"
   }
 }

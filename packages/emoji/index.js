@@ -1,44 +1,40 @@
-const { sources, workspace, SourceType } = require('coc.nvim')
+const { sources, workspace } = require('coc.nvim')
 const path = require('path')
 const fs = require('fs')
-const util = require('util')
+
+let items = []
 
 exports.activate = async context => {
-  let config = workspace.getConfiguration('coc.source.emoji')
-  let menu = '[' + config.get('shortcut', 'EMO') + ']'
   let file = path.resolve(__dirname, 'emoji.txt')
   if (!fs.existsSync(file)) return
 
-  let content = await util.promisify(fs.readFile)(file, 'utf8')
-  let lines = content.split(/\n/).slice(0, -1)
-  let items = lines.map(str => {
-    let parts = str.split(':')
-    return { description: parts[0], character: parts[1] }
+  fs.readFile(file, 'utf8', (err, content) => {
+    if (err) return
+    let lines = content.split(/\n/).slice(0, -1)
+    items = lines.map(str => {
+      let parts = str.split(':')
+      return { description: parts[0], character: parts[1] }
+    })
   })
-  let { nvim } = workspace
 
   let source = {
     name: 'emoji',
-    enable: config.get('enable', true),
-    priority: config.get('priority', 1),
-    filetypes: config.get('filetypes', ['markdown']),
-    sourceType: SourceType.Native,
     triggerCharacters: [':'],
-    doComplete: async opt => {
-      if (opt.triggerCharacter != ':') return
+    doComplete: async function (opt) {
+      if (opt.triggerCharacter != ':') return null
       return {
         items: items.map(o => {
           return {
             word: o.character,
             abbr: `${o.character} ${o.description}`,
-            menu,
+            menu: this.menu,
             filterText: o.description,
           }
         })
       }
     },
     onCompleteDone: async (item, opt) => {
-      if (opt.triggerCharacter != ':') return
+      let { nvim } = workspace
       let { linenr, col, input, line } = opt
       let buf = Buffer.from(line, 'utf8')
       let pre = buf.slice(0, col - 1).toString('utf8')
@@ -48,10 +44,5 @@ exports.activate = async context => {
     }
   }
 
-  sources.addSource(source)
-  context.subscriptions.push({
-    dispose: () => {
-      sources.removeSource(source)
-    }
-  })
+  context.subscriptions.push(sources.createSource(source))
 }
