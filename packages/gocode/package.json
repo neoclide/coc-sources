@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neoclide/coc-gocode.git"
+    "url": "git+https://github.com/neoclide/coc-sources.git"
   },
   "keywords": [
     "coc.nvim",
@@ -60,9 +60,9 @@
   "author": "chemzqm@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/neoclide/coc-gocode/issues"
+    "url": "https://github.com/neoclide/coc-sources/issues"
   },
-  "homepage": "https://github.com/neoclide/coc-gocode#readme",
+  "homepage": "https://github.com/neoclide/coc-sources#readme",
   "devDependencies": {
     "coc.nvim": ">=0.0.57"
   },
