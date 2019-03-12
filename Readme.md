@@ -59,6 +59,14 @@ Install what you need by command `:CocInstall {name}`
   **Don't** enable this source for filetypes that you're using language server
   for completion.
 
+- coc-syntax
+
+  Words from syntax list, see `:help ft-syntax-omni` in your vim.
+
+  ```vim
+  :CocInstall coc-syntax
+  ```
+
 - coc-gocode
 
   Completion use [gocode](https://github.com/nsf/gocode) for golang.

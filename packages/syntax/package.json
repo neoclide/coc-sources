@@ -1,0 +1,62 @@
+{
+  "name": "coc-syntax",
+  "version": "1.2.1",
+  "description": "Syntax words completion source for coc.nvim",
+  "scripts": {},
+  "engines": {
+    "coc": ">=0.0.57"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neoclide/coc-sources.git"
+  },
+  "keywords": [
+    "coc.nvim",
+    "syntax"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "coc.source.syntax.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "coc.source.syntax.shortcut": {
+          "type": "string",
+          "default": "SYN"
+        },
+        "coc.source.syntax.priority": {
+          "type": "integer",
+          "default": 3
+        },
+        "coc.source.syntax.disableSyntaxes": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "coc.source.syntax.filetypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Enabled filetypes, default enabled for all filetypes."
+        }
+      }
+    }
+  },
+  "author": "chemzqm@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neoclide/coc-sources/issues"
+  },
+  "homepage": "https://github.com/neoclide/coc-sources#readme",
+  "devDependencies": {
+    "coc.nvim": ">=0.0.57"
+  }
+}
