@@ -13,6 +13,7 @@ exports.activate = context => {
       return
     }
   }
+  let pumevent = workspace.env.pumevent
 
   let source = {
     name: 'gocode',
@@ -48,9 +49,10 @@ exports.activate = context => {
             let items = list[1]
             resolve({
               items: items.map(item => {
+                item.word = item.word.replace(/\($/, '')
+                if (pumevent) item.abbr = item.word
                 return {
                   ...item,
-                  word: item.word.replace(/\($/, ''),
                   menu: item.menu ? `${item.menu} ${menu}` : menu
                 }
               })
