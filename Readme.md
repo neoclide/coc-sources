@@ -83,7 +83,7 @@ Install what you need by command `:CocInstall {name}`
   :CocInstall coc-ultisnips
   ```
 
-  **Note:** this source could be block and may not work when you're using lazyLoad.
+  ❗**Important:** this source could be block and not work when ultisnips plugin not loaded in vim.
 
 - coc-neosnippet
 
@@ -93,7 +93,7 @@ Install what you need by command `:CocInstall {name}`
   :CocInstall coc-neosnippet
   ```
 
-  **Note:** this source could be block and may not work when you're using lazyLoad.
+  ❗**Important:** this source could be block and not work when neosnippet plugin not loaded in vim.
 
 ## Configure
 
