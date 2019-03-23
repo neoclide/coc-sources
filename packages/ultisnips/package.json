@@ -61,5 +61,6 @@
   "homepage": "https://github.com/neoclide/coc-sources#readme",
   "devDependencies": {
     "coc.nvim": ">=0.0.57"
-  }
+  },
+  "gitHead": "7ead63e794458e58e85d93556be8bf566ad1ceeb"
 }

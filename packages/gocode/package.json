@@ -71,5 +71,6 @@
   },
   "dependencies": {
     "which": "^1.3.1"
-  }
+  },
+  "gitHead": "7ead63e794458e58e85d93556be8bf566ad1ceeb"
 }
