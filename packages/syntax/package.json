@@ -41,7 +41,10 @@
           }
         },
         "coc.source.syntax.filetypes": {
-          "type": "array",
+          "type": [
+            "array",
+            "null"
+          ],
           "items": {
             "type": "string"
           },

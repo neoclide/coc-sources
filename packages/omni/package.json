@@ -48,7 +48,10 @@
           "default": "O"
         },
         "coc.source.omni.filetypes": {
-          "type": "array",
+          "type": [
+            "array",
+            "null"
+          ],
           "default": [],
           "description": "Enabled filetypes",
           "items": {

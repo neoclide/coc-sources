@@ -41,7 +41,10 @@
           }
         },
         "coc.source.emoji.filetypes": {
-          "type": "array",
+          "type": [
+            "array",
+            "null"
+          ],
           "default": [
             "markdown"
           ],

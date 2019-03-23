@@ -41,7 +41,10 @@
           "default": 0
         },
         "coc.source.word.filetypes": {
-          "type": "array",
+          "type": [
+            "array",
+            "null"
+          ],
           "default": null,
           "items": {
             "type": "string"

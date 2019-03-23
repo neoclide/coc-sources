@@ -41,7 +41,10 @@
           }
         },
         "coc.source.tag.filetypes": {
-          "type": "array",
+          "type": [
+            "array",
+            "null"
+          ],
           "default": null,
           "items": {
             "type": "string"

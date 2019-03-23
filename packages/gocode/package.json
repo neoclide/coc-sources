@@ -46,7 +46,10 @@
           "description": "Binary full path of gocode executable"
         },
         "coc.source.gocode.filetypes": {
-          "type": "array",
+          "type": [
+            "array",
+            "null"
+          ],
           "default": [
             "go"
           ],

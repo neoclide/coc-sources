@@ -41,7 +41,10 @@
           "default": "US"
         },
         "coc.source.ultisnips.filetypes": {
-          "type": "array",
+          "type": [
+            "array",
+            "null"
+          ],
           "default": null,
           "items": {
             "type": "string"
