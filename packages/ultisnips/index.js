@@ -38,7 +38,7 @@ exports.activate = context => {
       return { items }
     },
     onCompleteDone: async () => {
-      await nvim.eval('feedkeys("\\<C-R>=UltiSnips#ExpandSnippet()\\<CR>")')
+      await nvim.eval('feedkeys("\\<C-R>=UltiSnips#ExpandSnippet()\\<CR>", "n")')
     }
   }
 
