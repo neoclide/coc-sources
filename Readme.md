@@ -110,11 +110,16 @@ opened by `:CocConfig` to get completion for all available configurations.
 
 ## F.A.Q
 
-Q: Omni completion not working.
+**Q:** Omni completion not working.
 
-A: Make sure current filetype is included in `coc.source.omni.filetypes` section of your
+**A:** Make sure current filetype is included in `coc.source.omni.filetypes` section of your
 `coc-settings.json`, then make sure `omnifunc` is specified for current buffer
 by command: `:echo &omnifunc`.
+
+**Q:** Completion items of Ultisnips/neosnippet not shown.
+
+**A:** It won't work when your ultisnips or neosnippet plugin not loaded. For
+better experience, consider use [coc-snippets](https://github.com/neoclide/coc-snippets) instead.
 
 ## LICENSE
 
