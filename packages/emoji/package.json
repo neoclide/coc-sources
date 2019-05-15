@@ -29,6 +29,15 @@
           "type": "string",
           "default": "T"
         },
+        "coc.source.emoji.triggerCharacters": {
+          "type": "array",
+          "default": [
+            ":"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
         "coc.source.emoji.priority": {
           "type": "integer",
           "default": 3

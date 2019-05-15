@@ -19,9 +19,8 @@ exports.activate = async context => {
 
   let source = {
     name: 'emoji',
-    triggerCharacters: [':'],
-    doComplete: async function (opt) {
-      if (opt.triggerCharacter != ':') return null
+    triggerOnly: true,
+    doComplete: async function () {
       return {
         items: items.map(o => {
           return {
