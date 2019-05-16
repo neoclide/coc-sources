@@ -42,6 +42,9 @@ Install what you need by command `:CocInstall {name}`
 
   To complete emoji source, type `:` as trigger character.
 
+  It is also possible to change the emoji trigger character by putting
+  `"coc.source.emoji.triggerCharacters": ["TRIGGERCHAR"]` in your `coc-settings.json`
+
 - coc-omni
 
   Completion use `&omnifunc` of current buffer.
