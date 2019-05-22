@@ -25,6 +25,10 @@
           "type": "boolean",
           "default": true
         },
+        "coc.source.syntax.firstMatch": {
+          "type": "boolean",
+          "default": true
+        },
         "coc.source.syntax.shortcut": {
           "type": "string",
           "default": "SYN"

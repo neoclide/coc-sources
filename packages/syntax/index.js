@@ -14,6 +14,16 @@ exports.activate = async context => {
         words = await nvim.call('syntaxcomplete#OmniSyntaxList')
         cache[opt.filetype] = words
       }
+      let { input } = opt
+      if (!input.length) return null
+      let { firstMatch } = this
+      let isUpperCase = input[0] == input[0].toUpperCase()
+      if (firstMatch) {
+        let first = input[0]
+        words = words.filter(s => {
+          return isUpperCase ? s.startsWith(first) : s.toUpperCase().startsWith(first.toUpperCase())
+        })
+      }
       return {
         items: words.map(s => {
           return {
