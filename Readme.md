@@ -72,7 +72,7 @@ Install what you need by command `:CocInstall {name}`
 
 - coc-gocode
 
-  Completion use [gocode](https://github.com/nsf/gocode) for golang.
+  Completion use [gocode](https://github.com/mdempsky/gocode) for golang.
 
   ```vim
   :CocInstall coc-gocode
