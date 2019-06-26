@@ -1,4 +1,4 @@
-const { sources, workspace } = require('coc.nvim')
+const {sources, workspace} = require('coc.nvim')
 
 function byteSlice(content, start, end) {
   let buf = Buffer.from(content, 'utf8')
@@ -10,7 +10,7 @@ exports.activate = context => {
     let res = []
     for (let item of list) {
       if (typeof item == 'string') {
-        res.push({ word: item, menu })
+        res.push({word: item, menu})
       }
       if (item.hasOwnProperty('word')) {
         item.menu = item.menu ? item.menu : menu
@@ -27,10 +27,10 @@ exports.activate = context => {
       return config.get('triggerCharacters', null)
     },
     doComplete: async function (opt) {
-      let { nvim } = workspace
+      let {nvim} = workspace
       let func = await nvim.eval('&omnifunc')
       if (!func) return null
-      let { line, colnr, col } = opt
+      let {line, colnr, col} = opt
       let startcol = col
       try {
         startcol = await nvim.call(func, [1, ''])
@@ -43,10 +43,11 @@ exports.activate = context => {
       if (isNaN(startcol) || startcol < 0 || startcol > colnr) return null
       let text = byteSlice(line, startcol, colnr - 1)
       let words = await nvim.call(func, [0, text])
+      await nvim.call('cursor', [opt.linenr, colnr])
       if (words.hasOwnProperty('words')) {
         words = words.words
       }
-      let res = { items: convertToItems(words, this.menu) }
+      let res = {items: convertToItems(words, this.menu)}
       res.startcol = startcol
       return res
     }
