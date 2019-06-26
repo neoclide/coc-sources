@@ -50,12 +50,15 @@ function readFileByLine(fullpath, onLine, limit = 50000) {
 async function loadTags(fullpath, mtime) {
   let item = TAG_CACHE[fullpath]
   if (item && item.mtime >= mtime) return item.words
-  let words = new Set()
+  let words = new Map()
   await readFileByLine(fullpath, line => {
     if (line[0] == '!') return
-    let ms = line.match(/^[^\t\s]+/)
-    let w = ms ? ms[0] : null
-    if (w && w.length > 2) words.add(w)
+    let ms = line.split(/\t\s*/)
+    if (ms.length < 2) return
+    let [word, path] = ms
+    let wordItem = words.get(word) || []
+    wordItem.push(path)
+    words.set(word, wordItem)
   })
   TAG_CACHE[fullpath] = { words, mtime }
   return words
@@ -70,22 +73,25 @@ exports.activate = context => {
       let tagfiles = await getTagFiles()
       if (!tagfiles || tagfiles.length == 0) return null
       let list = await Promise.all(tagfiles.map(o => loadTags(o.file, o.mtime)))
-      let allWords = new Set()
+      let items = [];
       for (let words of list) {
-        for (let word of words.values()) {
-          allWords.add(word)
+        for (let [word, paths] of words.entries()) {
+          if (word[0] !== input[0]) continue
+          let infoList = Array.from(new Set(paths))
+          let len = infoList.length
+          if (len > 10) {
+            infoList = infoList.slice(0, 10)
+            infoList.push(`${len - 10} more...`)
+          }
+          items.push({
+            word,
+            menu: this.menu,
+            info: infoList.join('\n')
+          })
         }
       }
-      let words = Array.from(allWords.values())
-      words = words.filter(s => input[0] == s[0])
-      return {
-        items: words.map(word => {
-          return {
-            word,
-            menu: this.menu
-          }
-        })
-      }
+
+      return { items };
     }
   }))
 }
