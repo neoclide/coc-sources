@@ -1,6 +1,6 @@
-const { sources, workspace } = require('coc.nvim')
+const {sources, workspace} = require('coc.nvim')
 const which = require('which')
-const { spawn } = require('child_process')
+const {spawn} = require('child_process')
 
 exports.activate = context => {
   let config = workspace.getConfiguration('coc.source.gocode')
@@ -19,7 +19,7 @@ exports.activate = context => {
     name: 'gocode',
     triggerCharacters: ['.', ':'],
     doComplete: function (opt, token) {
-      let { filepath, linenr, col, input, bufnr } = opt
+      let {filepath, linenr, col, input, bufnr} = opt
       let document = workspace.getDocument(bufnr)
 
       let menu = this.menu || ''
@@ -51,10 +51,9 @@ exports.activate = context => {
               items: items.map(item => {
                 item.word = item.word.replace(/\($/, '')
                 if (pumevent) item.abbr = item.word
-                return {
-                  ...item,
+                return Object.assign({}, item, {
                   menu: item.menu ? `${item.menu} ${menu}` : menu
-                }
+                })
               })
             })
           } catch (e) {

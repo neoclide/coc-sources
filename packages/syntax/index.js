@@ -1,10 +1,10 @@
-const { sources, workspace } = require('coc.nvim')
+const {sources, workspace} = require('coc.nvim')
 
 // key values
 let cache = {}
 
 exports.activate = async context => {
-  let { nvim } = workspace
+  let {nvim} = workspace
   let source = {
     name: 'syntax',
     triggerCharacters: [],
@@ -12,11 +12,12 @@ exports.activate = async context => {
       let words = cache[opt.filetype]
       if (!words) {
         words = await nvim.call('syntaxcomplete#OmniSyntaxList')
+        // eslint-disable-next-line require-atomic-updates
         cache[opt.filetype] = words
       }
-      let { input } = opt
+      let {input} = opt
       if (!input.length) return null
-      let { firstMatch } = this
+      let {firstMatch} = this
       let isUpperCase = input[0] == input[0].toUpperCase()
       if (firstMatch) {
         let first = input[0]

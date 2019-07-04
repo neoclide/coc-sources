@@ -1,11 +1,11 @@
-const { sources, workspace } = require('coc.nvim')
+const {sources, workspace} = require('coc.nvim')
 const path = require('path')
 const fs = require('fs')
 const util = require('util')
 const readline = require('readline')
 
 const TAG_CACHE = {}
-const { nvim } = workspace
+const {nvim} = workspace
 
 async function getTagFiles() {
   let files = await nvim.call('tagfiles')
@@ -18,7 +18,7 @@ async function getTagFiles() {
   for (let file of files) {
     let stat = await util.promisify(fs.stat)(file)
     if (!stat || !stat.isFile()) continue
-    tagfiles.push({ file, mtime: stat.mtime })
+    tagfiles.push({file, mtime: stat.mtime})
   }
   return tagfiles
 }
@@ -60,7 +60,8 @@ async function loadTags(fullpath, mtime) {
     wordItem.push(path)
     words.set(word, wordItem)
   })
-  TAG_CACHE[fullpath] = { words, mtime }
+  // eslint-disable-next-line require-atomic-updates
+  TAG_CACHE[fullpath] = {words, mtime}
   return words
 }
 
@@ -68,12 +69,12 @@ exports.activate = context => {
   context.subscriptions.push(sources.createSource({
     name: 'tag',
     doComplete: async function (opt) {
-      let { input } = opt
+      let {input} = opt
       if (input.length == 0) return null
       let tagfiles = await getTagFiles()
       if (!tagfiles || tagfiles.length == 0) return null
       let list = await Promise.all(tagfiles.map(o => loadTags(o.file, o.mtime)))
-      let items = [];
+      let items = []
       for (let words of list) {
         for (let [word, paths] of words.entries()) {
           if (word[0] !== input[0]) continue
@@ -91,7 +92,7 @@ exports.activate = context => {
         }
       }
 
-      return { items };
+      return {items}
     }
   }))
 }

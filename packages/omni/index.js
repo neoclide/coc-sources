@@ -22,10 +22,6 @@ exports.activate = context => {
 
   context.subscriptions.push(sources.createSource({
     name: 'omni',
-    get triggerCharacters() {
-      let config = workspace.getConfiguration('coc.source.omni')
-      return config.get('triggerCharacters', null)
-    },
     doComplete: async function (opt) {
       let {nvim} = workspace
       let func = await nvim.eval('&omnifunc')
@@ -43,7 +39,7 @@ exports.activate = context => {
       if (isNaN(startcol) || startcol < 0 || startcol > colnr) return null
       let text = byteSlice(line, startcol, colnr - 1)
       let [words] = await nvim.eval(`[${func}(0, '${text.replace(/'/g, "''")}'),cursor(${opt.linenr},${colnr})]`)
-      await nvim.call('cursor', [opt.linenr, colnr])
+      if (!words || words.length == 0) return null
       if (words.hasOwnProperty('words')) {
         words = words.words
       }

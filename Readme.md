@@ -56,7 +56,7 @@ Install what you need by command `:CocInstall {name}`
   **Note:** Using omni completion in coc.nvim is not recommended, it will block vim on
   completion.
 
-  **Note:** You must configure `omni.filetypes` with filetypes you want omni
+  **Note:** You must configure `coc.source.omni.filetypes` with filetypes you want omni
   source to work.
 
   **Don't** enable this source for filetypes that you're using language server
