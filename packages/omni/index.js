@@ -42,7 +42,7 @@ exports.activate = context => {
       // invalid startcol
       if (isNaN(startcol) || startcol < 0 || startcol > colnr) return null
       let text = byteSlice(line, startcol, colnr - 1)
-      let words = await nvim.call(func, [0, text])
+      let [words] = await nvim.eval(`[${func}(0, '${text.replace(/'/g, "''")}'),cursor(${opt.linenr},${colnr})]`)
       await nvim.call('cursor', [opt.linenr, colnr])
       if (words.hasOwnProperty('words')) {
         words = words.words
