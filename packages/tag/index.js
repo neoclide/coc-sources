@@ -16,9 +16,13 @@ async function getTagFiles() {
   })
   let tagfiles = []
   for (let file of files) {
-    let stat = await util.promisify(fs.stat)(file)
-    if (!stat || !stat.isFile()) continue
-    tagfiles.push({file, mtime: stat.mtime})
+    try {
+      let stat = await util.promisify(fs.stat)(file)
+      if (!stat || !stat.isFile()) continue
+      tagfiles.push({file, mtime: stat.mtime})
+    } catch (e) {
+      // noop
+    }
   }
   return tagfiles
 }
