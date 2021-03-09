@@ -1,6 +1,6 @@
 {
   "name": "coc-emoji",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "emoji source for coc.nvim",
   "scripts": {},
   "engines": {
