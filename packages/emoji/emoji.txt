@@ -1617,7 +1617,6 @@ diamonds:♦
 hotsprings:♨
 recycle:♻
 wheelchair:♿
-hammer_pick:⚒
 anchor:⚓
 crossed_swords:⚔
 scales:⚖
