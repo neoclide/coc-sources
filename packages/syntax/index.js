@@ -1,19 +1,25 @@
-const {sources, workspace} = require('coc.nvim')
+const {sources, workspace, window} = require('coc.nvim')
 
 // key values
 let cache = {}
 
 exports.activate = async context => {
   let {nvim} = workspace
+  let outputChannel = window.createOutputChannel('syntax');
   let source = {
     name: 'syntax',
     triggerCharacters: [],
     doComplete: async function (opt) {
       let words = cache[opt.filetype]
       if (!words) {
-        words = await nvim.call('syntaxcomplete#OmniSyntaxList')
-        // eslint-disable-next-line require-atomic-updates
-        cache[opt.filetype] = words
+        try {
+          words = await nvim.call('syntaxcomplete#OmniSyntaxList')
+          // eslint-disable-next-line require-atomic-updates
+          cache[opt.filetype] = words
+        } catch (e) {
+          outputChannel.append(`Error: ${e.message}`)
+          return null
+        }
       }
       let {input} = opt
       if (!input.length) return null
