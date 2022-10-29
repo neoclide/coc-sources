@@ -1,7 +1,7 @@
-const { sources, workspace } = require('coc.nvim')
+const {sources, workspace} = require('coc.nvim')
 
 exports.activate = context => {
-  let { nvim } = workspace
+  let {nvim} = workspace
 
   let loadError = false
   let source = {
@@ -35,10 +35,10 @@ exports.activate = context => {
           })
         }
       }
-      return { items }
+      return {items}
     },
-    onCompleteDone: async () => {
-      await nvim.eval('feedkeys("\\<C-R>=UltiSnips#ExpandSnippet()\\<CR>", "n")')
+    onCompleteDone: () => {
+      nvim.call('UltiSnips#ExpandSnippet', [], true)
     }
   }
 
