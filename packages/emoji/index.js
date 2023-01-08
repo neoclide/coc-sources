@@ -5,14 +5,14 @@ const {promisify} = require('util')
 let items
 
 exports.activate = async context => {
-  const filpeath = context.asAbsolutePath('emoji.txt')
+  const filepath = context.asAbsolutePath('emoji.txt')
 
   let source = {
     name: 'emoji',
     triggerOnly: true,
     doComplete: async function (opt) {
       if (!items) {
-        let content = await promisify(fs.readFile)(filpeath, 'utf8')
+        let content = await promisify(fs.readFile)(filepath, 'utf8')
         let lines = content.split(/\n/).slice(0, -1)
         items = lines.map(str => {
           let parts = str.split(':')
