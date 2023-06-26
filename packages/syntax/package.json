@@ -52,6 +52,7 @@
           "items": {
             "type": "string"
           },
+          "default": null,
           "description": "Enabled filetypes, default enabled for all filetypes."
         }
       }
