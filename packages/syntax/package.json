@@ -1,6 +1,6 @@
 {
   "name": "coc-syntax",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Syntax words completion source for coc.nvim",
   "scripts": {},
   "engines": {
