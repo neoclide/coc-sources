@@ -67,8 +67,14 @@ function filterWords(words, opt) {
   let res = []
   let { input } = opt
   for (let word of words) {
-    if (!word.startsWith(input[0])) continue
     if (word.length <= input.length) continue
+    let first = input[0]
+    if ([input, word].every(str => /^[A-Za-z]{1,}$/.test(str))) {
+      if (!word.startsWith(first.toLowerCase())) continue
+      let code = first.charCodeAt(0)
+      let upperCase = code <= 90 && code >= 65
+      word = upperCase ? word[0].toUpperCase() + word.slice(1) : word
+    } else if (!word.startsWith(first)) continue
     res.push(word)
   }
   return res
