@@ -4,5 +4,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "build:packages": "npm run build --workspaces --if-present",
+    "test:packages": "npm run test --workspaces --if-present"
+  },
   "devDependencies": {}
 }
